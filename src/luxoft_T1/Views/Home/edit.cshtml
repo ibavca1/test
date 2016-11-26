@@ -1,0 +1,33 @@
+@using WebApplication.Models
+@model Customer
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>Edit Customer</h1>
+    <div>
+        <form action="/Home/Edit" method="POST">
+            <fieldset>
+                <legend>Customer</legend>
+                <div class="editor-label">
+                    @Html.LabelFor(model=>model.Name)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model=>model.Name)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model=>model.Phone)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model=>model.Phone)
+                </div>
+                @Html.HiddenFor(model=>model.id)
+                <input type="submit" value="Сохранить"/>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

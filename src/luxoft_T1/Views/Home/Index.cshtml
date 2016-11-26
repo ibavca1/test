@@ -1,0 +1,23 @@
+﻿@using luxoft_T1.Models
+@model IList<Customer>
+<!DOCTYPE HTML>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title</title>
+    </head>
+    <body>
+        <h1>ASP Core app.</h1>
+        <div>
+            <ul>
+                @foreach (var c in Model)
+                {
+                    <li>
+                        @Html.ActionLink(c.Name, "Edit", new { id = c.id }) @Html.ActionLink("X", "Delete", new { id = c.id }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                    </li>
+                }
+            </ul>
+        </div>
+        @Html.ActionLink("Create Customer", "Create", "Home", null, null)
+    </body>
+</html>
