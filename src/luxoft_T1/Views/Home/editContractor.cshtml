@@ -1,5 +1,5 @@
 ﻿@using luxoft_T1.Models
-@model Customer
+@model Contractor
 <!DOCTYPE HTML>
 <html lang="ru">
 <head>
@@ -7,9 +7,9 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <h1>Edit Customer</h1>
+    <h1>Edit Contractor</h1>
     <div>
-        <form action="/Home/Edit" method="POST">
+        <form action="/Home/EditContractor" method="POST">
             <fieldset>
                 <legend>Customer</legend>
                 <div class="editor-label">
@@ -24,6 +24,16 @@
                 <div class="editor-field">
                     @Html.TextBoxFor(model=>model.Phone)
                 </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.email)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.email)
+                </div>
+                <div class="editor-field">
+                    @Html.ListBoxFor(model => model.Status, new SelectList(Model.Status));
+                </div>
+                
                 @Html.HiddenFor(model=>model.id)
                 <input type="submit" value="Сохранить"/>
             </fieldset>

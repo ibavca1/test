@@ -29,6 +29,7 @@ namespace luxoft_T1
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            app.UseStaticFiles(new StaticFileOptions() { RequestPath = new PathString("/public") });
             app.UseMvcWithDefaultRoute();
 
         }

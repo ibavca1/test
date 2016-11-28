@@ -1,23 +1,74 @@
 ﻿@using luxoft_T1.Models
-@model IList<Customer>
+@model  MyModel
 <!DOCTYPE HTML>
 <html lang="ru">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title</title>
+        <title>@ViewBag.Title</title>        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>         
     </head>
     <body>
         <h1>ASP Core app.</h1>
-        <div>
-            <ul>
-                @foreach (var c in Model)
+        <div class="container-fluid">
+            <!--Задание 1, 2 -->
+            <div class="row">
+                <div class="col-md-6">
+                    Customer: <br />
+                    <ul>
+                        @foreach (var c in Model.listCustomer.GetAll())
+                        {
+                            <li>
+                                @Html.ActionLink(c.Name, "Edit", new { id = c.id }) @Html.ActionLink("X", "Delete", new { id = c.id }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                            </li>
+                        }
+                    </ul>
+                    @Html.ActionLink("Create Customer", "Create", "Home", new { Model.listCustomer }, null)
+                </div>
+                <div class="col-md-6">
+                    Contractor: <br />
+                    <ul>
+                        @foreach (var c in Model.listContractor.GetAll())
+                        {
+                            <li>
+                                @Html.ActionLink(c.Name, "EditContractor", new { id = c.id }) @Html.ActionLink("X", "DeleteContractor", new { id = c.id }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                            </li>
+                        }
+                    </ul>
+                    @Html.ActionLink("Create Contractor", "Create", "Home", new { Model.listContractor }, null)
+                </div>
+            </div>
+            <!--Задание 3, 4 -->
+            <div class="row">
+                @foreach (var c in Model.listCustomer.GetAll())
                 {
-                    <li>
-                        @Html.ActionLink(c.Name, "Edit", new { id = c.id }) @Html.ActionLink("X", "Delete", new { id = c.id }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
-                    </li>
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#@c.Name">@c.Name</a>
+                            </h4>
+                        </div>
+                        <div id="@c.Name" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                @foreach (var a in Model.listContractor.GetListBy(c.id))
+                                {
+                                    <li class="list-group-item">@a.Name 
+                                        <select>
+                                            @foreach(var status in a.Status)
+                                            {
+                                                <option>@status</option>
+                                            }
+                                        </select> 
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 }
-            </ul>
-        </div>
-        @Html.ActionLink("Create Customer", "Create", "Home", null, null)
+            </div>            
+        </div>        
     </body>
 </html>
